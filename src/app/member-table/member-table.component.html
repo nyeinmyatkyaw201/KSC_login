@@ -1,0 +1,81 @@
+<div class="flex justify-center">
+  <div>
+    <div class="flex">
+      <h5 class="mt-6 mb-2 ml-4 mr-4 text-lg font-semibold">Member Table</h5>
+      <div class="ml-24 h-max flex items-center justify-center mt-6">
+        <input
+          type="text"
+          placeholder=" Search"
+          [(ngModel)]="searchText"
+          class="h-9 border rounded-lg w-60 p-2"
+        />
+      </div>
+    </div>
+    <div class="mt-4 ml-4 mr-4 w-max bg-gray-100 rounded-lg">
+      <table class="w-max rounded-lg">
+        <thead class="border border-solid border-l-0 border-r-0">
+          <tr>
+            <th class="text-md px-6 py-3 bg-blue-400 w-5">Id</th>
+            <th class="text-md px-6 py-3 bg-blue-400 w-52">Name</th>
+            <th class="text-md px-6 py-3 bg-blue-400 w-44">Date Of Birth</th>
+            <th class="text-md px-6 py-3 bg-blue-400 w-44">Identity Card</th>
+            <th class="text-md px-6 py-3 bg-blue-400 w-48">Phone Number</th>
+            <th class="text-md px-6 py-3 bg-blue-400 w-40">Comfirm</th>
+          </tr>
+        </thead>
+        <tbody class="pt-4 pb-5">
+          <tr
+            *ngFor="
+              let member of AllMembers
+                | search : searchText
+                | paginate
+                  : { itemsPerPage: pageSize, currentPage: currentPage }
+            "
+            class="hover:bg-gray-300"
+          >
+            <td class="text-center p-1 py-3">{{ member.id }}</td>
+            <td class="text-center p-1 py-3">{{ member.t2 }}</td>
+            <td class="text-center p-1 py-3">{{ member.t8 }}</td>
+            <td class="text-center p-1 py-3">{{ member.t9 }}</td>
+            <td class="text-center p-1 py-3">{{ member.t18 }}</td>
+            <td class="flex justify-center items-center-center p-1 py-3">
+              <div
+                class="w-24 h-8 flex bg-green-300 justify-center items-center rounded-md"
+              >
+                submitted
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <div class="mt-4 flex justify-center items-center">
+      <button
+        class="cursor-pointer py-1 px-3 hover:text-blue-600 mr-5 font-semibold"
+        (click)="previousPage()"
+      >
+        Previous
+      </button>
+      <button
+        class="cursor-pointer py-1 px-3"
+        *ngFor="let pageNumber of PageNumber(); let i = index"
+        [class.bg-cyan-500]="i + 1 == currentPage"
+        [class.text-white]="i + 1 == currentPage"
+        (click)="changePage(i + 1)"
+      >
+        {{ i + 1 }}
+      </button>
+      <button
+        class="cursor-pointer py-1 px-3 hover:text-blue-600 ml-5 font-semibold"
+        (click)="nextPage()"
+      >
+        Next
+      </button>
+    </div> -->
+    <div class="flex justify-center mt-3">
+      <pagination-controls (pageChange)="currentPage = $event">
+      </pagination-controls>
+    </div>
+    
+  </div>
+</div>
