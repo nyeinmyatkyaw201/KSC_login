@@ -1,7 +1,10 @@
 <div class="flex justify-center">
   <div>
     <div class="flex">
-      <h5 class="mt-6 mb-2 ml-4 mr-4 text-lg font-semibold">Member Table</h5>
+      <div class="mt-6 mb-2 ml-4 mr-4 text-lg font-normal">
+        Member Table
+      </div>
+
       <div class="ml-24 h-max flex items-center justify-center mt-6">
         <input
           type="text"
@@ -31,7 +34,9 @@
                 | paginate
                   : { itemsPerPage: pageSize, currentPage: currentPage }
             "
+            [routerLink]="['/memberdetail']"
             class="hover:bg-gray-300"
+            (click)="setId(member.id)"
           >
             <td class="text-center p-1 py-3">{{ member.id }}</td>
             <td class="text-center p-1 py-3">{{ member.t2 }}</td>
@@ -76,6 +81,5 @@
       <pagination-controls (pageChange)="currentPage = $event">
       </pagination-controls>
     </div>
-    
   </div>
 </div>

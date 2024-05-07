@@ -36,7 +36,7 @@ export class MemberTableComponent implements OnInit {
       },
     });
   }
-
+  
   //  for pagination
   currentPage: number = 1;
   pageSize: number = 10;
@@ -72,5 +72,8 @@ export class MemberTableComponent implements OnInit {
   //   this.visibleData();
   // }
 
-  
+  setId(id : number){
+    this.api.id = id;
+    console.log(id,">>>>>>>>>>")
+  }
 }

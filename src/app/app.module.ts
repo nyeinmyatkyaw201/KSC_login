@@ -10,6 +10,8 @@ import { MemberTableComponent } from './member-table/member-table.component';
 import { SearchPipe } from './search.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MemberDetailComponent } from './member-detail/member-detail.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,10 @@ import { MemberDetailComponent } from './member-detail/member-detail.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BrowserAnimationsModule,
+    
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
