@@ -32,6 +32,7 @@ import { RegistrationComponent } from './registration/registration.component';
     BrowserAnimationsModule,
     
     
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

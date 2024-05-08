@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-member-detail',
@@ -7,7 +8,7 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./member-detail.component.css'],
 })
 export class MemberDetailComponent implements OnInit {
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService,private router: Router) {}
   ngOnInit(): void {
     this.memberId = this.api.id;
     this.getMember(this.memberId);
@@ -110,5 +111,8 @@ export class MemberDetailComponent implements OnInit {
       }
     })
   }
-
+  back(){
+    this.router.navigateByUrl('membertable')
+  }
+ 
 }
