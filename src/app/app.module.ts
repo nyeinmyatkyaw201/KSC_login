@@ -12,6 +12,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MemberDetailComponent } from './member-detail/member-detail.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegistrationComponent } from './registration/registration.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MembersetupComponent,
     MemberTableComponent,
     SearchPipe,
-    MemberDetailComponent
+    MemberDetailComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

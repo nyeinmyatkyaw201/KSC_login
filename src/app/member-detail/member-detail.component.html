@@ -213,7 +213,7 @@
   </div>
 
   <div *ngIf="selectedTab === 'tab2'" class="p-4">
-    <div class="mt-2 flex justify-center items-center">
+    <div class="mt-2 flex justify-center items-center w-full ml-2 mb-0 p-4 h-full shadow-xl border border-gray-400 rounded-lg">
       <div class="w-max bg-gray-100">
         <table>
           <thead class="border border-solid border-l-0 border-r-0">
@@ -241,7 +241,33 @@
     </div>
   </div>
 
-  <div *ngIf="selectedTab === 'tab3'" class="p-4 bg-gray-100">
-    Tab 3 Content
+  <div *ngIf="selectedTab === 'tab3'" class="p-4">
+    <div class="flex justify-center items-center w-full ml-2 mt-2 mb-0 p-4 h-full shadow-xl border border-gray-400 rounded-lg">
+     <div>
+      <table>
+        <thead>
+          <tr>
+            <th ><div class="text-md  bg-blue-400 px-2 flex items-center text-white font-normal h-9 w-64">Description</div></th>
+            <th ><div class="text-md  bg-blue-400 px-2 flex items-center text-white w-96 h-9 font-normal">Name</div></th>
+            <th><div class="bg-blue-400  px-4 h-9 w-10"></div>  </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let uploadedfile of uploadedFiles,let i = index" class="bg-gray-100">
+            <th class="h-9">1</th>
+            <th class="h-9"><div class="flex justify-start font-light">{{uploadedfile.t2}}</div></th>
+            <th class="flex justify-center items-center h-9"><div class="border h-4 w-7 border-gray-600 flex justify-center items-center rounded-md shadow-lg cursor-pointer" (click)="viewImage(i)">
+              <i [ngClass]="visible[i] ? 'fa fa-eye' : 'fa fa-eye-slash'"
+              aria-hidden="true"></i></div></th>
+          </tr>
+        </tbody>
+      </table>
+     </div>
+  </div>
+</div>
+<div *ngIf="showPopup" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+  <div class="bg-white pl-4 pr-4 pb-0 pt-2 rounded-lg size-72" [style.transform]="'scale(' + zoomLevel + ')'" >
+    <div class="flex justify-end cursor-pointer mb-2" (click)="closePopup()"><i class="fa fa-times" aria-hidden="true"></i></div>
+    <div><img [src]="imageUrls[0]" alt="Image" class="size-max"></div>
   </div>
 </div>

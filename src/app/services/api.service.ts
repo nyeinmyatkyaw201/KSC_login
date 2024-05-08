@@ -21,4 +21,8 @@ export class ApiService {
   getBmember(id : any){
     return this.http.get(`http://localhost:3000/api/v1/user/getBmember/${id}`)
   }
+  Uploadedfile(id : any){
+    return this.http.get(`http://localhost:3000/api/v1/member/upload/getallfile/${id}`)
+  }
+
 }
