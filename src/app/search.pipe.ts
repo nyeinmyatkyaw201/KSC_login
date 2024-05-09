@@ -21,7 +21,7 @@ export class SearchPipe implements PipeTransform {
       if(searchText.startsWith("09") && !isNaN(parseFloat(searchText))){
         return (JSON.stringify(item.t18).toLowerCase().includes(searchText))
       }
-      return (JSON.stringify(item.t2).toLocaleLowerCase().includes(searchText) || JSON.stringify(item.t9).toLocaleLowerCase().includes(searchText))
+      return (JSON.stringify(item.t2).toLocaleLowerCase().includes(searchText) || JSON.stringify(item.t9).toLocaleLowerCase().includes(searchText)) 
      
     });
   }

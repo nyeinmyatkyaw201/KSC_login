@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { MembersetupComponent } from './membersetup/membersetup.component';
 import { MemberTableComponent } from './member-table/member-table.component';
 import { MemberDetailComponent } from './member-detail/member-detail.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: "membersetup",
     component: MembersetupComponent
+  },
+  {
+    path: "registration",
+    component : RegistrationComponent
   }
 ];
 

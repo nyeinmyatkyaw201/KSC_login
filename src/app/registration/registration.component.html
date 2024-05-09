@@ -1,1 +1,289 @@
-<p>registration works!</p>
+<div class="flex justify-between">
+  <div class="items-center w-full h-10 ml-4 mr-2 mt-5 mb-1 flex">
+    <div
+      class="w-max p-2 border border-gray-500 cursor-pointer mr-2 rounded-md"
+      (click)="selectTab('tab1')"
+      [class.bg-blue-200]="selectedTab === 'tab1'"
+    >
+      Registration-A
+    </div>
+    <div
+      class="w-max p-2 border border-gray-500 cursor-pointer mr-2 rounded-md"
+      (click)="selectTab('tab2')"
+      [class.bg-blue-200]="selectedTab === 'tab2'"
+    >
+      Registration-b
+    </div>
+    <div
+      class="w-max p-2 border border-gray-500 cursor-pointer rounded-md"
+      (click)="selectTab('tab3')"
+      [class.bg-blue-200]="selectedTab === 'tab3'"
+    >
+      Member Info
+    </div>
+  </div>
+</div>
+<div class="mt-1">
+  <div *ngIf="selectedTab === 'tab1'" class="p-4">
+    <div
+      class="w-full ml-2 mt-2 mb-0 p-4 h-full shadow-xl border border-gray-400 rounded-lg"
+    >
+      <div class="h-max">
+        <h2 class="text-center text-lg font-medium block">အသင်းဝင် မှတ်တမ်း</h2>
+        <div class="flex flex-wrap">
+          <div class="form mr-4">
+            <div class="mt-2 w-full justify-between flex">
+              <label for="name" class="text-xs">အမည်</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                [(ngModel)]="registrationData.name"
+                class="text-black text-sm w-80 outline-none border-2 px-1 py-1 border-gray-600 rounded-md"
+              />
+            </div>
+            <div class="mt-2 w-full justify-between flex">
+              <label for="othername" class="text-xs">အခြားအမည်ရှိလျှင်</label>
+              <input
+                type="text"
+                id="othername"
+                name="othername"
+                [(ngModel)]="registrationData.othername"
+                class="text-black text-sm w-80 outline-none border-2 px-1 py-1 border-gray-600 rounded-md"
+              />
+            </div>
+            <div class="mt-2 w-full justify-between flex">
+              <label for="identity" class="text-xs"
+                >နိုင်ငံသားမှတ်ပုံတင်အမှတ်</label
+              >
+              <div class="flex w-80 justify-between" id="identity">
+                <form class="">
+                  <div class="relative inline-block w-full text-left">
+                    <select
+                      class="text-black text-sm w-12 outline-none border-2 px-0 py-1 border-gray-600 rounded-md"
+                      name="nrcNostate"
+                      [(ngModel)]="registrationData.nrcNostate"
+                      (change)="getnrcPlace($event)"
+                      (ngModelChange)="registrationData.nrcNostate = $event"
+                    >
+                      <option *ngFor="let index of myNrc" [value]="index">
+                        {{ index }}
+                      </option>
+                    </select>
+                  </div>
+                </form>
+                <form>
+                  <div class="relative inline-block w-full text-left">
+                    <select
+                      class="text-black text-sm w-16 outline-none border-2 px-0 py-1 border-gray-600 rounded-md"
+                      name="nrcNocity"
+                      [ngModel]="registrationData.nrcNocity"
+                      (ngModelChange)="registrationData.nrcNocity = $event"
+                    >
+                      <!-- <option *ngIf="registrationData.nrcNocity" value="">{{registrationData.nrcNocity}}</option> -->
+                      <option *ngFor="let index of nrcplace" [value]="index">
+                        {{ index }}
+                      </option>
+                    </select>
+                  </div>
+                </form>
+                <form>
+                  <div class="relative inline-block w-full text-left">
+                    <select
+                      class="text-black text-sm w-14 outline-none border-2 px-0 py-1 border-gray-600 rounded-md"
+                      name="nrcNotype"
+                      [ngModel]="registrationData.nrcNotype"
+                      (ngModelChange)="registrationData.nrcNotype = $event"
+                    >
+                      <option>--</option>
+                      <option>(နိုင်)</option>
+                      <option>(ဧည့်)</option>
+                      <option>(ပြု)</option>
+                    </select>
+                  </div>
+                </form>
+                <input
+                  type="text"
+                  id="nrcNumber"
+                  name="nrcNumber"
+                  [(ngModel)]="registrationData.nrcNumber"
+                  class="text-black text-sm w-36 outline-none border-2 px-1 py-1 border-gray-600 rounded-md"
+                  maxlength="6"
+                />
+              </div>
+            </div>
+            <div class="mt-2 w-full justify-between flex">
+              <label for="religionRace" class="text-xs"
+                >လူမျိူး/ကိုးကွယ်သည့်ဘာသာ</label
+              >
+              <div class="flex w-80 justify-between" id="religionRace">
+                <form>
+                  <div class="relative inline-block w-full text-left">
+                    <select
+                      class="text-black text-sm w-20 text-center outline-none border-2 px-0 py-1 border-gray-600 rounded-md"
+                      name="race"
+                      [ngModel]="registrationData.race"
+                      (ngModelChange)="registrationData.race = $event"
+                    >
+                      <option *ngFor="let index of racearray" [value]="index">
+                        {{ index }}
+                      </option>
+                    </select>
+                  </div>
+                </form>
+                <form>
+                  <div class="relative inline-block w-full text-left">
+                    <select
+                      class="text-black text-sm w-56 outline-none border-2 px-0 py-1 border-gray-600 rounded-md"
+                      name="religion"
+                      [ngModel]="registrationData.religion"
+                      (ngModelChange)="registrationData.religion = $event"
+                    >
+                      <option
+                        *ngFor="let index of religionarray"
+                        [value]="index"
+                      >
+                        {{ index }}
+                      </option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="mt-2 w-full justify-between flex">
+              <label for="birthplace" class="text-xs">မွေးဖွားသည့်‌‌ဒေသ</label>
+              <input
+                type="text"
+                id="birthplace"
+                name="birthplace"
+                [(ngModel)]="registrationData.birthplace"
+                class="text-black text-sm w-80 outline-none border-2 px-1 py-1 border-gray-600 rounded-md"
+              />
+            </div>
+
+            <div class="mt-2 w-full justify-between flex">
+              <label for="birthdate" class="text-xs">မွေးသက္ကရာဇ်</label>
+              <input
+                type="text"
+                id="birthdate"
+                name="birthdate"
+                [(ngModel)]="registrationData.birthdate"
+                class="text-black text-sm w-80 outline-none border-2 px-1 py-1 border-gray-600 rounded-md"
+              />
+            </div>
+
+            <div class="mt-2 w-full justify-between flex">
+              <label for="fathername" class="text-xs">အဘအမည်</label>
+              <input
+                type="text"
+                id="fathername"
+                name="fathername"
+                [(ngModel)]="registrationData.fathername"
+                class="text-black text-sm w-80 outline-none border-2 px-1 py-1 border-gray-600 rounded-md"
+              />
+            </div>
+            <div class="mt-2 w-full justify-between flex">
+              <label for="mothername" class="text-xs">အမိအမည်</label>
+              <input
+                type="text"
+                id="mothername"
+                name="mothername"
+                [(ngModel)]="registrationData.mothername"
+                class="text-black text-sm w-80 outline-none border-2 px-1 py-1 border-gray-600 rounded-md"
+              />
+            </div>
+            <div class="mt-2 w-full justify-between flex">
+              <label for="education" class="text-xs">ပညာအရည်အချင်း</label>
+              <input
+                type="text"
+                id="education"
+                name="education"
+                [(ngModel)]="registrationData.education"
+                class="text-black text-sm w-80 outline-none border-2 px-1 py-1 border-gray-600 rounded-md"
+              />
+            </div>
+            <div class="mt-2 w-full justify-between flex">
+              <label for="work" class="text-xs">အလုပ်အကိုင်</label>
+              <input
+                type="text"
+                id="work"
+                name="work"
+                [(ngModel)]="registrationData.work"
+                class="text-black text-sm w-80 outline-none border-2 px-1 py-1 border-gray-600 rounded-md"
+              />
+            </div>
+          </div>
+          <div class="formB ml-4">
+            <div class="mt-2 w-full justify-between flex">
+              <label for="currentwork" class="text-xs">လက်ရှိအလုပ်အကိုင်</label>
+              <input
+                type="text"
+                id="currentwork"
+                name="currentwork"
+                [(ngModel)]="registrationData.currentwork"
+                class="text-black text-sm w-80 outline-none border-2 px-1 py-1 border-gray-600 rounded-md"
+              />
+            </div>
+            <div class="mt-2 w-full justify-between flex">
+              <label for="workplace" class="text-xs">ဌာနအမည်</label>
+              <input
+                type="text"
+                id="workplace"
+                name="workplace"
+                [(ngModel)]="registrationData.workplace"
+                class="text-black text-sm w-80 outline-none border-2 px-1 py-1 border-gray-600 rounded-md"
+              />
+            </div>
+            <div class="mt-2 w-full justify-between flex">
+              <label for="lastwork" class="text-xs"
+                >နောက်ဆုံးလုပ်ကိုင်ခဲ့သည့်အလုပ်အကိုင်</label
+              >
+              <input
+                type="text"
+                id="lastwork"
+                name="lastwork"
+                [(ngModel)]="registrationData.lastwork"
+                class="text-black text-sm w-80 outline-none border-2 px-1 py-1 border-gray-600 rounded-md"
+              />
+            </div>
+            <div class="mt-2 w-full justify-between flex">
+              <label for="address" class="text-xs">နေရပ်လိပ်စာ</label>
+              <textarea
+                name="address"
+                id="address"
+                [(ngModel)]="registrationData.address"
+                cols="30"
+                rows="3"
+                class="text-black text-sm w-80 outline-none border-2 px-1 py- border-gray-600 rounded-md"
+              ></textarea>
+            </div>
+
+            <div class="mt-2 w-full justify-between flex">
+              <label for="currentaddress" class="text-xs"
+                >လက်ရှိနေရပ်လိပ်စာ</label
+              >
+              <textarea
+                name="currentaddress"
+                id="currentaddress"
+                [(ngModel)]="registrationData.currentaddress"
+                cols="30"
+                rows="3"
+                class="text-black text-sm w-80 outline-none border-2 px-1 py- border-gray-600 rounded-md"
+              ></textarea>
+            </div>
+            <div class="mt-2 w-full justify-between flex">
+              <label for="phone" class="text-xs">ဖုန်းနံပါတ်</label>
+              <input
+                type="phone"
+                id="phone"
+                name="phone"
+                [(ngModel)]="registrationData.phone"
+                class="text-black text-sm w-80 outline-none border-2 px-1 py-1 border-gray-600 rounded-md"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

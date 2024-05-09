@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-member-table',
   templateUrl: './member-table.component.html',
   styleUrls: ['./member-table.component.css'],
 })
 export class MemberTableComponent implements OnInit {
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService,private router: Router) {}
   ngOnInit(): void {
     this.getAllmember();
   }
@@ -75,5 +75,8 @@ export class MemberTableComponent implements OnInit {
   setId(id : number){
     this.api.id = id;
     console.log(id,">>>>>>>>>>")
+  }
+  goToRegistration(){
+    this.router.navigateByUrl('registration')
   }
 }
