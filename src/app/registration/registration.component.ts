@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormDataModel } from './registration';
 import { ApiService } from '../services/api.service';
+import { FormRegiModel} from './registrationB';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +18,7 @@ export class RegistrationComponent implements OnInit{
   }
 
   identityno: string = '';
-  id: any = '';
+  relations: any = [];
   nrcNo: any = [];
   nrcplace: any = [];
   nrc: any = [];
@@ -47,6 +48,9 @@ export class RegistrationComponent implements OnInit{
   selectedTab: string = 'tab1';
   selectTab(tabName: string) {
     this.selectedTab = tabName;
+    if(tabName == 'tab2'){
+      this.getRelation();
+    }
   }
 
   today = new Date();
@@ -145,6 +149,9 @@ export class RegistrationComponent implements OnInit{
     await this.api.register(myData).subscribe({
       next: (data: any) => {
         console.log(data);
+         this.api.idForUpdate = data.user.id;
+        
+        this.api.identityno = this.identityno;
       },
       error: (err: any) => {
         console.log(err);
@@ -165,6 +172,27 @@ export class RegistrationComponent implements OnInit{
     const diffDays: number = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     const age: number = Math.floor(diffDays / 365.25);
     return age;
+  }
+  async updateMember() {
+    console.log(this.registrationData);
+    console.log(this.api.idForUpdate);
+    await this.api
+      .updateRegister(this.registrationData, this.api.idForUpdate)
+      .subscribe({
+        next: (data: any) => {
+          console.log(data);
+          
+        },
+        error: (err: any) => {
+          console.log(err.message);
+          if ((err.message = 'already exist this member')) {
+            this.errormessage = 'ဤမှတ်ပုံတင်နံပါတ်ဖြင့်အသင်းဝင်ရှိပြီးပါပီ';
+            setTimeout(() => {
+              this.errormessage = '';
+            }, 2000);
+          }
+        },
+      });
   }
 
   registration() {
@@ -202,8 +230,30 @@ export class RegistrationComponent implements OnInit{
       setTimeout(() => {
         this.errormessage = '';
       }, 2000);
-    } else {
+    }else if (this.api.idForUpdate && this.selectedTab == 'tab1') {
+      this.updateMember();
+    }
+     else {
       this.register();
     }
   }
+
+  //  For Registration B 
+  RegiDatas: FormRegiModel[] = [];
+  addRow(){
+    const newFormRegiModel : FormRegiModel = new FormRegiModel();
+    newFormRegiModel.parentid = this.api.idForUpdate
+    this.RegiDatas.push(newFormRegiModel)
+  }
+  removeRow(index: number) {
+    this.RegiDatas.splice(index, 1);
+  }
+  getRelation() {
+    this.api.GetRelation().subscribe((result: any) => {
+      this.relations = result.data;
+      console.log(this.relations, 'relation');
+    });
+  }
+
+
 }

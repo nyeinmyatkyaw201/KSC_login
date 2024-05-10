@@ -22,14 +22,23 @@
       Member Info
     </div>
   </div>
+  <div class="flex items-center mr-3 h-10 mt-5 mb-1">
+    <button
+      class="border bg-blue-400 active:bg-blue-600 hover:bg-blue-500 p-2 w-max cursor-pointer rounded-lg text-black text-center mr-3"
+      (click)="registration()"
+    >
+      Save
+    </button>
+  </div>
 </div>
 <div class="mt-1">
+  <!-- for tab 1 -->
   <div *ngIf="selectedTab === 'tab1'" class="p-4">
     <div
       class="w-full ml-2 mt-2 mb-0 p-4 h-full shadow-xl border border-gray-400 rounded-lg"
     >
       <div class="h-max">
-        <h2 class="text-center text-lg font-medium block">အသင်းဝင် မှတ်တမ်း</h2>
+        <h2 class="text-center text-lg font-medium block">အသင်းဝင်ထည့်ရန်</h2>
         <div class="flex flex-wrap">
           <div class="form mr-4">
             <div class="mt-2 w-full justify-between flex">
@@ -164,7 +173,7 @@
             <div class="mt-2 w-full justify-between flex">
               <label for="birthdate" class="text-xs">မွေးသက္ကရာဇ်</label>
               <input
-                type="text"
+                type="date"
                 id="birthdate"
                 name="birthdate"
                 [(ngModel)]="registrationData.birthdate"
@@ -284,6 +293,130 @@
           </div>
         </div>
       </div>
+      <div class="mt-3 flex justify-center" *ngIf="errormessage">
+        <p class="text-red-600 text-sm">{{ errormessage }}</p>
+      </div>
+      <span class="ml-20"></span>
+    </div>
+  </div>
+  <!-- for tab 2 -->
+  <div *ngIf="selectedTab === 'tab2'" class="p-4">
+    <div
+      class="w-full flex justify-center items-center ml-2 mt-2 mb-0 p-4 h-full shadow-xl border border-gray-400 rounded-lg"
+    >
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <div
+                class="text-md justify-center bg-blue-400 px-2 flex items-center text-white font-normal h-9 w-52"
+              >
+                အမည်
+              </div>
+            </th>
+            <th>
+              <div
+                class="text-md justify-center bg-blue-400 px-2 flex items-center text-white font-normal h-9 w-36"
+              >
+                မွေးနေ့
+              </div>
+            </th>
+            <th>
+              <div
+                class="text-md justify-center bg-blue-400 px-2 flex items-center text-white font-normal h-9 w-36"
+              >
+                အလုပ် အကိုင်
+              </div>
+            </th>
+            <th>
+              <div
+                class="text-md justify-center bg-blue-400 px-2 flex items-center text-white font-normal h-9 w-36"
+              >
+                ကဒ်ပြား
+              </div>
+            </th>
+            <th>
+              <div
+                class="text-md justify-center bg-blue-400 px-2 flex items-center text-white font-normal h-9 w-32"
+              >
+                တော်စပ်ပုံ
+              </div>
+            </th>
+            <th>
+              <div
+                class="text-md bg-blue-400 px-3 flex items-center text-white font-normal h-9 w-max cursor-pointer"
+                (click)="addRow()"
+              >
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-gray-100">
+          <tr *ngFor="let Regidata of RegiDatas; let i = index">
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="Regidata.Name"
+                id="Name"
+                name="Name"
+                class="w-52 h-8 bg-gray-200 border border-gray-500 rounded-sm pl-2"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="Regidata.Date_of_Birth"
+                id="Date_of_Birth"
+                name="Date_of_Birth"
+                class="w-36 h-8 bg-gray-200 border border-gray-500 rounded-sm pl-2"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="Regidata.Work"
+                id="Work"
+                name="Work"
+                class="w-36 h-8 bg-gray-200 border border-gray-500 rounded-sm pl-2"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="Regidata.Card"
+                id="Card"
+                name="Card"
+                class="w-36 h-8 bg-gray-200 border border-gray-500 rounded-sm pl-2"
+              />
+            </td>
+            <td>
+              <select
+                name="relation"
+                id="relation"
+                [ngModel]="Regidata.relation"
+                (ngModelChange)="Regidata.relation = $event"
+                class="w-32 h-8 bg-gray-200 border border-gray-500 rounded-sm pl-2"
+              >
+                <option
+                  *ngFor="let relation of relations"
+                  [value]="relation.t2"
+                >
+                  {{ relation.t2 }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <div
+                class="w-full h-8 bg-gray-200 border border-gray-500 rounded-sm flex items-center justify-center cursor-pointer"
+                (click)="removeRow(i)"
+              >
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

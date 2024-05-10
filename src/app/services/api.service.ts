@@ -8,6 +8,8 @@ export class ApiService {
 
   constructor(private http:HttpClient) { }
   
+  identityno : string = '';
+  idForUpdate : string = '';
   id : number = 0
   login(data:any){
     return this.http.post('http://localhost:3000/api/v1/user/login',data)
@@ -34,11 +36,17 @@ export class ApiService {
   getReligion(){
     return this.http.get('http://localhost:3000/api/v1/user/religion')
   };
+  GetRelation(){
+    return this.http.get('http://localhost:3000/api/v1/user/relation')
+  };
   getRace(){
     return this.http.get('http://localhost:3000/api/v1/user/race')
   }
   register(data : any){
     return this.http.post('http://localhost:3000/api/v1/user/registrationmember',data)
+  }
+  updateRegister(data: any, id : any){
+    return this.http.patch(`http://localhost:3000/api/v1/user/registrationmember/${id}`,data)
   }
 
 }
